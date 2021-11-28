@@ -1,18 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 
 type OnOffPropsType = {
-    // on: boolean
+    currentToggle: boolean
+    changeToggle: (props: boolean) => void
 }
-function OnOff (props: OnOffPropsType) {
-    console.log('OnOff rendering')
 
-    let [on, setOn] = useState(false)
+function OnOff(props: OnOffPropsType) {
 
     const onStyle = {
         width: '40px',
         height: '30px',
         border: '1px solid black',
-        backgroundColor: on ? 'green' : 'white',
+        backgroundColor: props.currentToggle ? 'green' : 'white',
         display: 'inline-block',
         padding: '2px'
     }
@@ -20,7 +19,7 @@ function OnOff (props: OnOffPropsType) {
         width: '40px',
         height: '30px',
         border: '1px solid black',
-        backgroundColor: on ? 'white' : 'red',
+        backgroundColor: props.currentToggle ? 'white' : 'red',
         display: 'inline-block',
         padding: '2px',
         marginLeft: '2px'
@@ -32,14 +31,16 @@ function OnOff (props: OnOffPropsType) {
         border: '1px solid black',
         display: 'inline-block',
         marginLeft: '5px',
-        backgroundColor: on ? 'green' : 'red'
+        backgroundColor: props.currentToggle ? 'green' : 'red'
     }
 
     return (
         <div>
-            <div style={onStyle} onClick={() => setOn(true)}>ON</div>
-            <div style={offStyle} onClick={() => setOn(false)}>OFF</div>
-            <div style={indicatorStyle} onClick={() => {alert("TOGGLE")}}></div>
+            <div style={onStyle} onClick={() => props.changeToggle(true)}>ON</div>
+            <div style={offStyle} onClick={() => props.changeToggle(false)}>OFF</div>
+            <div style={indicatorStyle} onClick={() => {
+                alert("TOGGLE")
+            }}></div>
         </div>
     )
 }

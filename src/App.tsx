@@ -1,52 +1,40 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Accordion from "./components/Accordion/Accordion";
-import {Rating} from "./components/Rating/Rating";
-import OnOff from "./components/OnOff/OnOff";
+import {Rating, RatingValueType} from "./components/Rating/Rating";
 import UnControledAccordion from "./components/UnControledAccordion/UncontroledAccordion";
 import {UnControledRating} from "./components/UnControledRating/UnControledRating";
+import {UnControlledOnOff} from "./components/UnControlledOnOff/UnControlledOnOff";
+import OnOff from "./components/OnOff/OnOff";
+
 
 function App() {
     console.log('App rendering')
+
+    let [ratingValue, setRatingValue] = useState<RatingValueType>(4)
+    let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false)
+    let [toggle, setToggle] = useState<boolean>(true)
+
     return (
         <div>
-{/*            <PageTitle title={'This is APP component'}/>
-            <PageTitle title={'My friends'}/>
-            Article 1
-            <Rating value={3}/>*/}
-            {/*<Accordion titleValue={'Menu'} collapsed={true}/>*/}
-            {/*<Accordion titleValue={'Users'} collapsed={false}/>*/}
+            <h4>Controlled Components</h4>
+            <OnOff currentToggle={toggle}
+                   changeToggle={setToggle}/>
+            <Accordion titleValue={'Menu'}
+                       collapsed={accordionCollapsed}
+                       onChange={() => {
+                           setAccordionCollapsed(!accordionCollapsed)
+                       }}/>
+            <Rating value={ratingValue} onClick={setRatingValue}/>
 
-            Article 2
-{/*            <Rating value={0}/>
-            <Rating value={1}/>
-            <Rating value={2}/>
-            <Rating value={3}/>
-            <Rating value={4}/>
-            <Rating value={5}/>*/}
+            <h4>Uncontrolled Components</h4>
 
-            <OnOff/>
-            <OnOff/>
-            <OnOff/>
-
+            <UnControlledOnOff onChange={setToggle}/>{toggle.toString()}
             <UnControledAccordion titleValue={'Menu'}/>
-            <UnControledAccordion titleValue={'Users'}/>
-
-
             <UnControledRating/>
-
 
         </div>
     );
-}
-
-type PageTitlePropsType = {
-    title: string
-}
-
-function PageTitle(props: PageTitlePropsType) {
-    console.log('PageTitle rendering')
-    return <h1>{props.title}</h1>
 }
 
 export default App;
