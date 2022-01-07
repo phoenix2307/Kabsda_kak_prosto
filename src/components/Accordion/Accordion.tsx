@@ -1,4 +1,6 @@
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
+import {Inp} from "../Input/Input";
+import {InpRef} from "../Input/InputRef";
 
 type ItemType = {
     title: string
@@ -13,11 +15,19 @@ type AccordionPropsType = {
     onClick: (value: any) => void
 }
 
+
 function Accordion(props: AccordionPropsType) {
+    // const [value, setValue] = useState <ChangeEvent<HTMLInputElement> | string>('')
 
     return <div>
         <AccordionTitle title={props.titleValue} click={props.onChange}/>
         {!props.collapsed && <AccordionBody items={props.items} onClick={props.onClick}/>}
+        <div>
+            {/*<Inp changeInputValue={changeInputValue}/> - {value}*/}
+            <Inp/>
+            <InpRef/>
+        </div>
+
     </div>
 
 }
@@ -39,10 +49,11 @@ type AccordionBodyPropsType = {
 
 function AccordionBody(props: AccordionBodyPropsType) {
     return <ul>
-        {props.items.map( (i, index) => <li
+        {props.items.map((i, index) => <li
             key={index}
-        onClick={()=>props.onClick(i.value)}>{i.title}</li>)}
+            onClick={() => props.onClick(i.value)}>{i.title}</li>)}
     </ul>
 }
+
 
 export default Accordion
