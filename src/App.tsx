@@ -6,6 +6,11 @@ import UnControledAccordion from "./components/UnControledAccordion/UncontroledA
 import {UnControledRating} from "./components/UnControledRating/UnControledRating";
 import {UnControlledOnOff} from "./components/UnControlledOnOff/UnControlledOnOff";
 import OnOff from "./components/OnOff/OnOff";
+import {
+    ControlledCheckBox,
+    ControlledInput,
+    ControlledSelect
+} from "./components/controlledElements/controlledElements";
 
 
 function App() {
@@ -36,12 +41,17 @@ function App() {
                        onClick={onClick}
             />
             <Rating value={ratingValue} onClick={setRatingValue}/>
+            <ControlledInput/>
+            <ControlledCheckBox/>
+            <div></div>
+            <ControlledSelect/>
 
-            <h4>Uncontrolled Components</h4>
+
+{/*            <h4>Uncontrolled Components</h4>
 
             <UnControlledOnOff onChange={setToggle}/>{toggle.toString()}
             <UnControledAccordion titleValue={'Menu'}/>
-            <UnControledRating/>
+            <UnControledRating/>*/}
 
         </div>
     );
