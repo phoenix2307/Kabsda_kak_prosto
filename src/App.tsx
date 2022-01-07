@@ -9,11 +9,14 @@ import OnOff from "./components/OnOff/OnOff";
 
 
 function App() {
-    console.log('App rendering')
 
     let [ratingValue, setRatingValue] = useState<RatingValueType>(4)
     let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false)
     let [toggle, setToggle] = useState<boolean>(true)
+
+    const onClick = (value: any) => {
+        alert(`item: ${value} was clicked`)
+    }
 
     return (
         <div>
@@ -24,7 +27,14 @@ function App() {
                        collapsed={accordionCollapsed}
                        onChange={() => {
                            setAccordionCollapsed(!accordionCollapsed)
-                       }}/>
+                       }}
+                       items={[
+                           {title: 'Alex', value: 1},
+                           {title: 'Nika', value: 2},
+                           {title: 'Natali', value: 3}
+                       ]}
+                       onClick={onClick}
+            />
             <Rating value={ratingValue} onClick={setRatingValue}/>
 
             <h4>Uncontrolled Components</h4>
