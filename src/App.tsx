@@ -2,9 +2,6 @@ import React, {useState} from 'react';
 import './App.css';
 import Accordion from "./components/Accordion/Accordion";
 import {Rating, RatingValueType} from "./components/Rating/Rating";
-import UnControledAccordion from "./components/UnControledAccordion/UncontroledAccordion";
-import {UnControledRating} from "./components/UnControledRating/UnControledRating";
-import {UnControlledOnOff} from "./components/UnControlledOnOff/UnControlledOnOff";
 import OnOff from "./components/OnOff/OnOff";
 import {
     ControlledCheckBox,
@@ -12,6 +9,7 @@ import {
     ControlledSelect
 } from "./components/controlledElements/controlledElements";
 import {Select} from "./components/customSelect/Select";
+import {SelectCorrect} from "./components/customSelect/SelectCorrect";
 
 
 function App() {
@@ -19,7 +17,7 @@ function App() {
     let [ratingValue, setRatingValue] = useState<RatingValueType>(4)
     let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false)
     let [toggle, setToggle] = useState<boolean>(true)
-
+    //to Select
     const technologies = [
         {id: '1', title: 'HTML'},
         {id: '2', title: 'CSS'},
@@ -28,12 +26,26 @@ function App() {
         {id: '5', title: 'React'},
         {id: '6', title: 'React Native'}
     ]
-
-    let [selectId, setSelectId] = useState<string>('1')
-
     const onClick = (value: any) => {
         alert(`item: ${value} was clicked`)
     }
+    //
+    //to SelectCorrect
+    const technologiesCorrect = [
+        {value: '1', title: 'HTML'},
+        {value: '2', title: 'CSS'},
+        {value: '3', title: 'JavaScript'},
+        {value: '4', title: 'TypeScript'},
+        {value: '5', title: 'React'},
+        {value: '6', title: 'React Native'}
+    ]
+
+    const [value, setValue] = useState('4')
+    //можно просто вызывать setValue по ссылке. Так как в нее через пропсы возвращается значение value
+/*    const clickItem = (value: any) => {
+        setValue(value)
+    }*/
+    //
 
     return (
         <div>
@@ -48,7 +60,7 @@ function App() {
                        items={[
                            {title: 'Alex', value: 1},
                            {title: 'Nika', value: 2},
-                           {title: 'Natali', value: 3}
+                           {title: 'Natalie', value: 3}
                        ]}
                        onClick={onClick}
             />
@@ -60,16 +72,13 @@ function App() {
             <hr/>
             Домашка по Select
             <hr/>
-            <Select
+            {/*            <Select
                 options={technologies}
-            />
-
-
-{/*            <h4>Uncontrolled Components</h4>
-
-            <UnControlledOnOff onChange={setToggle}/>{toggle.toString()}
-            <UnControledAccordion titleValue={'Menu'}/>
-            <UnControledRating/>*/}
+            />*/}
+            <SelectCorrect
+                onChange={setValue}
+                value={value}
+                items={technologiesCorrect}/>
 
         </div>
     );
