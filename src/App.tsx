@@ -11,6 +11,7 @@ import {
     ControlledInput,
     ControlledSelect
 } from "./components/controlledElements/controlledElements";
+import {Select} from "./components/customSelect/Select";
 
 
 function App() {
@@ -18,6 +19,17 @@ function App() {
     let [ratingValue, setRatingValue] = useState<RatingValueType>(4)
     let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false)
     let [toggle, setToggle] = useState<boolean>(true)
+
+    const technologies = [
+        {id: '1', title: 'HTML'},
+        {id: '2', title: 'CSS'},
+        {id: '3', title: 'JavaScript'},
+        {id: '4', title: 'TypeScript'},
+        {id: '5', title: 'React'},
+        {id: '6', title: 'React Native'}
+    ]
+
+    let [selectId, setSelectId] = useState<string>('1')
 
     const onClick = (value: any) => {
         alert(`item: ${value} was clicked`)
@@ -43,8 +55,14 @@ function App() {
             <Rating value={ratingValue} onClick={setRatingValue}/>
             <ControlledInput/>
             <ControlledCheckBox/>
-            <div></div>
+            <div>----------------</div>
             <ControlledSelect/>
+            <hr/>
+            Домашка по Select
+            <hr/>
+            <Select
+                options={technologies}
+            />
 
 
 {/*            <h4>Uncontrolled Components</h4>
