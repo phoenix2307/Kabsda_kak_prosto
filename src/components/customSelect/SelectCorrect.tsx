@@ -1,4 +1,4 @@
-import React, {useState, KeyboardEvent} from "react";
+import React, {useState, KeyboardEvent, useEffect} from "react";
 import styles from './SelectCorrect.module.css'
 
 type ItemType = {
@@ -16,17 +16,39 @@ export const SelectCorrect = (props: SelectPropsType) => {
     const [active, setActive] = useState(false)
     const [hoveredElementValue, setHoveredElementValue] = useState(props.value)
 
+    const selectedItem = props.items.find(i => i.value === props.value)
+    const hoveredItem = props.items.find(i => i.value === hoveredElementValue)
+
+    useEffect(() => {
+        setHoveredElementValue(props.value)
+    }, [props.value])
+
     const toggleItems = () => setActive(!active)
-    const onItemClock = (value: any) => {
+    const onItemClick = (value: any) => {
         props.onChange(value)
         toggleItems()
     }
 
-    const selectedItem = props.items.find(i => i.value === props.value)
-    const hoveredItem = props.items.find(i => i.value === hoveredElementValue)
     const keyUp = (e: KeyboardEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        console.log(e.key)
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            for (let i = 0; i < props.items.length; i++) {
+                if (props.items[i].value === hoveredElementValue) {
+                    const pretendentElement = e.key === 'ArrowDown'
+                        ? props.items[i + 1]
+                        : props.items[i - 1]
+                    if (pretendentElement) {
+                        props.onChange(pretendentElement.value)
+                        return
+                    }
+                }
+            }
+            if (!selectedItem) {
+                props.onChange(props.items[0].value)
+            }
+        }
+        if (e.key === 'Enter' || e.key === 'Escape') {
+            setActive(false)
+        }
     }
 
 
@@ -36,10 +58,14 @@ export const SelectCorrect = (props: SelectPropsType) => {
             {
                 active && <div className={styles.items}>
                     {props.items.map(i => <div
-                        onMouseEnter={ () => { setHoveredElementValue(i.value) } }
-                        className={styles.item + ' ' + (hoveredItem === i ? styles.selected: '') }
+                        onMouseEnter={() => {
+                            setHoveredElementValue(i.value)
+                        }}
+                        className={styles.item + ' ' + (hoveredItem === i ? styles.selected : '')}
                         key={i.value}
-                        onClick={() => { onItemClock(i.value) }}
+                        onClick={() => {
+                            onItemClick(i.value)
+                        }}
                     >{i.title}</div>)}
                 </div>
             }
