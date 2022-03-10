@@ -16,7 +16,8 @@ type AccordionPropsType = {
 }
 
 
-function Accordion(props: AccordionPropsType) {
+export function Accordion(props: AccordionPropsType) {
+    console.log('ACCORDION')
     // const [value, setValue] = useState <ChangeEvent<HTMLInputElement> | string>('')
 
     return <div>
@@ -55,5 +56,4 @@ function AccordionBody(props: AccordionBodyPropsType) {
     </ul>
 }
 
-
-export default Accordion
+export const AccordionMemo = React.memo(Accordion)

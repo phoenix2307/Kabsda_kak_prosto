@@ -41,7 +41,9 @@ function OnOff(props: OnOffPropsType) {
             <div style={indicatorStyle} onClick={() => {
                 alert("TOGGLE")
             }}></div>
+            { console.log('on-off')}
         </div>
+
     )
 }
 

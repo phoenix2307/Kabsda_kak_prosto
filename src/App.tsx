@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import Accordion from "./components/Accordion/Accordion";
 import {Rating, RatingValueType} from "./components/Rating/Rating";
-import OnOff from "./components/OnOff/OnOff";
 import {
     ControlledCheckBox,
     ControlledInput,
@@ -10,6 +8,10 @@ import {
 } from "./components/controlledElements/controlledElements";
 import {Select} from "./components/customSelect/Select";
 import {SelectCorrect} from "./components/customSelect/SelectCorrect";
+import UnControledAccordion from "./components/UnControledAccordion/UncontroledAccordion";
+import OnOff from "./components/OnOff/OnOff";
+import {AccordionMemo} from "./components/Accordion/Accordion";
+import {ExampleForUseMemo} from "./components/forUseMemo/ExampleForUseMemo";
 
 
 function App() {
@@ -45,40 +47,55 @@ function App() {
 /*    const clickItem = (value: any) => {
         setValue(value)
     }*/
-    //
+
+
+    const RatingMemo = React.memo(Rating)
+    const ControlledInputMemo = React.memo(ControlledInput)
+    const ControlledCheckBoxMemo = React.memo(ControlledCheckBox)
+    const ControlledSelectMemo = React.memo(ControlledSelect)
+    const SelectCorrectMemo = React.memo(SelectCorrect)
+    const UnControledAccordionMemo = React.memo(UnControledAccordion)
+    const OnOffMemo = React.memo(OnOff)
 
     return (
         <div>
-            <h4>Controlled Components</h4>
-            <OnOff currentToggle={toggle}
-                   changeToggle={setToggle}/>
-            <Accordion titleValue={'Menu'}
-                       collapsed={accordionCollapsed}
-                       onChange={() => {
-                           setAccordionCollapsed(!accordionCollapsed)
-                       }}
-                       items={[
-                           {title: 'Alex', value: 1},
-                           {title: 'Nika', value: 2},
-                           {title: 'Natalie', value: 3}
-                       ]}
-                       onClick={onClick}
-            />
-            <Rating value={ratingValue} onClick={setRatingValue}/>
-            <ControlledInput/>
-            <ControlledCheckBox/>
-            <div>----------------</div>
-            <ControlledSelect/>
+            {/*<h4>Controlled Components</h4>*/}
+            {/*<OnOffMemo currentToggle={toggle}*/}
+            {/*       changeToggle={setToggle}/>*/}
+            {/*<AccordionMemo titleValue={'Menu'}*/}
+            {/*           collapsed={accordionCollapsed}*/}
+            {/*           onChange={() => {*/}
+            {/*               setAccordionCollapsed(!accordionCollapsed)*/}
+            {/*           }}*/}
+            {/*           items={[*/}
+            {/*               {title: 'Alex', value: 1},*/}
+            {/*               {title: 'Nika', value: 2},*/}
+            {/*               {title: 'Natalie', value: 3}*/}
+            {/*           ]}*/}
+            {/*           onClick={onClick}*/}
+            {/*/>*/}
+            {/*<RatingMemo value={ratingValue} onClick={setRatingValue}/>*/}
+            {/*<ControlledInputMemo/>*/}
+            {/*<ControlledCheckBoxMemo/>*/}
+            {/*<div>----------------</div>*/}
+            {/*<ControlledSelectMemo/>*/}
+            {/*<hr/>*/}
+            {/*Домашка по Select*/}
+            {/*<hr/>*/}
+            {/*            <Select*/}
+            {/*    options={technologies}*/}
+            {/*/>*/}
+            {/*<SelectCorrectMemo*/}
+            {/*    onChange={setValue}*/}
+            {/*    value={value}*/}
+            {/*    items={technologiesCorrect}/>*/}
+
+            {/*<hr/>*/}
+            {/*<UnControledAccordionMemo titleValue={'for REDUCER'}/>*/}
             <hr/>
-            Домашка по Select
-            <hr/>
-            {/*            <Select
-                options={technologies}
-            />*/}
-            <SelectCorrect
-                onChange={setValue}
-                value={value}
-                items={technologiesCorrect}/>
+            Example use.Memo
+            <ExampleForUseMemo/>
+
 
         </div>
     );
