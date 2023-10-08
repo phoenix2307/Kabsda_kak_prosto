@@ -4,10 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {AppMemo} from "./memo/AppMemo";
+import {Clock} from "./components/Clock";
 
 ReactDOM.render(
     // <AppMemo/>,
-    <App />,
+    // <App />,
+    <Clock/>,
   document.getElementById('root')
 );
 
