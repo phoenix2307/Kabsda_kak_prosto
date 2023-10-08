@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {AppMemo} from "./memo/AppMemo";
-import {Clock} from "./components/Clock";
+import {Clock} from "./components/Clock/Clock";
 
 ReactDOM.render(
     // <AppMemo/>,
